@@ -8,3 +8,5 @@ langchain_community
 openai
 langchain-openai
 streamlit-chatbox
+fastapi
+bcrypt

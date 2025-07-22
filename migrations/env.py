@@ -3,6 +3,7 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config, pool
 from alembic import context
 from dotenv import load_dotenv
+import sys
 
 # Carrega as variáveis do .env
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
@@ -20,11 +21,14 @@ if database_url:
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from model.agent_memory import Base as AgentMemoryBase
+from model.user import Base as UserBase
+
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
-# target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = [AgentMemoryBase.metadata, UserBase.metadata]
 
 
 def run_migrations_offline() -> None:
