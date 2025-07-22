@@ -1,8 +1,19 @@
-# Exemplo de configuração do banco de dados PostgreSQL
-POSTGRES_USER=seu_usuario
-POSTGRES_PASSWORD=sua_senha
+# Configurações do banco de dados PostgreSQL para Alembic e SQLAlchemy
+POSTGRES_USER=usuario
+POSTGRES_PASSWORD=senha
 POSTGRES_DB=digiAi
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
-DATABASE_URL=postgresql://seu_usuario:sua_senha@localhost:5432/digiAi
-JWT_SECRET=sua_chave_super_secreta
+DATABASE_URL=postgresql://usuario:senha@localhost:5432/digiAi
+
+OPENROUTER_API_KEY=chave
+OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+
+# Proxy corporativo
+PROXY_USER=guilherme.saito
+PROXY_PASS=890484gS
+PROXY_HOST=10.10.30.9
+PROXY_PORT=3128
+
+JWT_SECRET=senha
+API_URL=http://127.0.0.1:11111
