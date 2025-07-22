@@ -4,3 +4,6 @@ sqlalchemy
 alembic
 python-dotenv
 psycopg2-binary
+langchain_community
+openai
+langchain-openai
