@@ -1,0 +1,36 @@
+# Como usar o Alembic Migrations 🚀
+
+Bem-vindo(a) ao sistema de migrations do projeto! Aqui usamos o Alembic para gerenciar as alterações no banco de dados de forma segura e organizada. Siga este passo a passo sempre que precisar criar ou aplicar migrations:
+
+## O que é migration?
+Migration é um "passo" de alteração no banco de dados (criar tabela, adicionar coluna, etc). O Alembic garante que todos do time tenham o banco igual!
+
+## Como rodar as migrations (aplicar no banco)
+1. Abra o terminal na raiz do projeto.
+2. Ative o ambiente virtual (se ainda não estiver ativo):
+   - Windows: `venv\Scripts\activate`
+   - Linux/Mac: `source venv/bin/activate`
+3. Execute:
+   ```bash
+   alembic upgrade head
+   ```
+   Pronto! Todas as alterações do banco serão aplicadas.
+
+## Como criar uma nova migration
+1. Faça sua alteração no modelo (model) Python, se necessário.
+2. Gere uma migration:
+   ```bash
+   alembic revision -m "descrição da mudança"
+   ```
+3. Abra o arquivo gerado em `migrations/versions/` e edite as funções `upgrade` e `downgrade` conforme a alteração desejada.
+4. Rode novamente `alembic upgrade head` para aplicar.
+
+## Dicas importantes
+- Sempre use o comando Alembic para criar migrations, nunca crie arquivos manualmente!
+- Se der erro, confira se o arquivo `.env` está correto e se o banco está rodando.
+- Se precisar desfazer uma migration, use:
+  ```bash
+  alembic downgrade -1
+  ```
+
+Qualquer dúvida, chame um dev mais experiente! 😃

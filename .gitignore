@@ -1,0 +1,25 @@
+# Ignorar ambiente virtual
+.venv/
+venv/
+
+# Ignorar arquivos de configuração sensíveis
+.env
+
+# Ignorar arquivos de cache do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar arquivos de banco de dados locais
+*.sqlite3
+
+# Ignorar arquivos do Alembic que não são necessários
+migrations/versions/__pycache__/
+
+# Ignorar arquivos do VSCode
+.vscode/
+
+# Ignorar arquivos de sistema
+.DS_Store
+Thumbs.db

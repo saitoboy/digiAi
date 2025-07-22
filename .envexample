@@ -1,0 +1,7 @@
+# Exemplo de configuração do banco de dados PostgreSQL
+POSTGRES_USER=seu_usuario
+POSTGRES_PASSWORD=sua_senha
+POSTGRES_DB=digiAi
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+DATABASE_URL=postgresql://seu_usuario:sua_senha@localhost:5432/digiAi
