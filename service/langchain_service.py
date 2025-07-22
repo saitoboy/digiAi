@@ -8,6 +8,7 @@ from os import getenv
 from dotenv import load_dotenv
 import yaml
 from pathlib import Path
+from langchain_core.messages import AIMessage
 
 load_dotenv()
 
@@ -42,12 +43,30 @@ def get_persona_prompt():
     return PromptTemplate(template=template, input_variables=["question", "system_message"])
 
 # Função para processar uma pergunta
+# Corrige para retornar apenas o texto da resposta, sem metadados
+
 def process_question(question: str, model_name: str = DEFAULT_MODEL_NAME):
     llm = get_openrouter_llm(model_name)
     prompt = get_persona_prompt()
     system_message = load_persona_yaml()
     chain = prompt | llm
-    return chain.invoke({"question": question, "system_message": system_message})
+    resposta = chain.invoke({"question": question, "system_message": system_message})
+    # Extrai apenas o texto antes de qualquer 'additional_kwargs' ou metadados
+    texto = None
+    if isinstance(resposta, dict) and "content" in resposta:
+        texto = resposta["content"]
+    elif hasattr(resposta, "content"):
+        texto = resposta.content
+    elif isinstance(resposta, AIMessage):
+        texto = resposta.content
+    elif isinstance(resposta, str):
+        texto = resposta
+    else:
+        texto = str(resposta)
+    # Remove metadados extras se vierem juntos (ex: '\nadditional_kwargs=')
+    if "additional_kwargs" in texto:
+        texto = texto.split("additional_kwargs")[0].strip()
+    return texto
 
 def chat_loop():
     print("\nDigite sua pergunta para o Digi (ou 'sair' para encerrar):")
