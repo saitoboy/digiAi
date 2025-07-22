@@ -10,3 +10,5 @@ langchain-openai
 streamlit-chatbox
 fastapi
 bcrypt
+uvicorn
+PyJWT

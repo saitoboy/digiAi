@@ -6,13 +6,13 @@ from model.agent_memory import AgentMemory, Base
 from dotenv import load_dotenv
 from routes.user import router as user_router
 from routes.chat import router as chat_router
+from db.session import SessionLocal, engine
 import os
 
 load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+SessionLocal = SessionLocal  # para manter compatibilidade
 
 # Garante que as tabelas existem
 Base.metadata.create_all(bind=engine)

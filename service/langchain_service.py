@@ -4,7 +4,7 @@ Serviço para integração com LangChain e processamento do agente de IA.
 """
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
-from os import getenv
+from os import getenv, environ
 from dotenv import load_dotenv
 import yaml
 from pathlib import Path
@@ -14,6 +14,16 @@ load_dotenv()
 
 # Nome do modelo DeepSeek V3 0324 (free) no OpenRouter
 DEFAULT_MODEL_NAME = "deepseek/deepseek-chat-v3-0324:free"
+
+# --- Configuração de proxy corporativo para requests externos ---
+proxy_user = getenv("PROXY_USER")
+proxy_pass = getenv("PROXY_PASS")
+proxy_host = getenv("PROXY_HOST")
+proxy_port = getenv("PROXY_PORT")
+if proxy_user and proxy_pass and proxy_host and proxy_port:
+    proxy_url = f"http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}"
+    environ["HTTP_PROXY"] = proxy_url
+    environ["HTTPS_PROXY"] = proxy_url
 
 # Função para criar o LLM do OpenRouter (sem headers customizados)
 def get_openrouter_llm(model_name: str = DEFAULT_MODEL_NAME):
